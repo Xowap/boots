@@ -3,6 +3,7 @@ import { browser } from "$app/environment";
 export interface CapabilityData {
     score: number;
     mode: "auto" | "manual";
+    subScores?: Record<string, number>;
 }
 
 export interface Study {

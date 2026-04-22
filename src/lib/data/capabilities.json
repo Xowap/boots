@@ -2,149 +2,341 @@
     "capabilities": [
         {
             "id": "continuous_delivery",
-            "name": "Continuous Delivery"
+            "name": "Continuous Delivery",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "version_control",
+                        "name": "Version Control",
+                        "questions": [
+                            { "id": "vc_code", "text": "All application code is in version control." },
+                            { "id": "vc_config", "text": "All system configuration is in version control." }
+                        ]
+                    },
+                    {
+                        "id": "deployment_automation",
+                        "name": "Deployment Automation",
+                        "questions": [
+                            { "id": "da_automated", "text": "Our deployments are performed by a fully automated process." },
+                            { "id": "da_no_manual", "text": "Our deployments do not require manual steps." }
+                        ]
+                    },
+                    {
+                        "id": "continuous_integration",
+                        "name": "Continuous Integration",
+                        "questions": [
+                            { "id": "ci_automated", "text": "Each commit triggers an automated build and test." },
+                            { "id": "ci_daily", "text": "Code is integrated into the main branch at least daily." }
+                        ]
+                    },
+                    {
+                        "id": "trunk_based",
+                        "name": "Trunk-Based Development",
+                        "questions": [
+                            { "id": "tbd_branches", "text": "We have fewer than three active branches." },
+                            { "id": "tbd_short_lived", "text": "Branches live for less than 24 hours." }
+                        ]
+                    },
+                    {
+                        "id": "test_automation",
+                        "name": "Test Automation",
+                        "questions": [
+                            { "id": "ta_comprehensive", "text": "We have a comprehensive suite of automated tests." },
+                            { "id": "ta_every_build", "text": "Automated tests are run on every build." }
+                        ]
+                    },
+                    {
+                        "id": "test_data",
+                        "name": "Test Data Management",
+                        "questions": [
+                            { "id": "tdm_automated", "text": "Test data is automatically created as part of the test suite." },
+                            { "id": "tdm_no_manual", "text": "We do not rely on manual setup of test data." }
+                        ]
+                    },
+                    {
+                        "id": "security",
+                        "name": "Shift Left on Security",
+                        "questions": [
+                            { "id": "sec_continuous", "text": "Security is considered throughout the development process." },
+                            { "id": "sec_ci", "text": "Automated security tests are part of the CI/CD pipeline." }
+                        ]
+                    },
+                    {
+                        "id": "architecture",
+                        "name": "Loosely Coupled Architecture",
+                        "questions": [
+                            { "id": "arch_independent", "text": "We can deploy our service independently of other services." },
+                            { "id": "arch_modular", "text": "Our architecture allows for modular development." }
+                        ]
+                    },
+                    {
+                        "id": "empowered_teams",
+                        "name": "Empowered Teams",
+                        "questions": [
+                            { "id": "et_tools", "text": "Teams can choose their own tools." },
+                            { "id": "et_process", "text": "Teams have authority to change their own processes." }
+                        ]
+                    },
+                    {
+                        "id": "monitoring",
+                        "name": "Monitoring",
+                        "questions": [
+                            { "id": "mon_production", "text": "We have real-time monitoring for our production systems." },
+                            { "id": "mon_accessible", "text": "Monitoring data is accessible to the whole team." }
+                        ]
+                    },
+                    {
+                        "id": "notifications",
+                        "name": "Proactive Notifications",
+                        "questions": [
+                            { "id": "notif_early", "text": "We are notified of failures before customers report them." },
+                            { "id": "notif_actionable", "text": "Alerts are actionable and relevant." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "identity",
-            "name": "Identity"
+            "name": "Identity",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "identity_core",
+                        "name": "Identity",
+                        "questions": [
+                            { "id": "id_mission", "text": "I understand the mission of my organization." },
+                            { "id": "id_values", "text": "My values align with the organization's values." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "job_satisfaction",
-            "name": "Job Satisfaction"
+            "name": "Job Satisfaction",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "satisfaction_core",
+                        "name": "Job Satisfaction",
+                        "questions": [
+                            { "id": "js_happy", "text": "I am generally happy with my job." },
+                            { "id": "js_recommend", "text": "I would recommend this organization as a great place to work." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "lean_management",
-            "name": "Lean Management"
+            "name": "Lean Management",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "wip_limits",
+                        "name": "Limit Work in Progress",
+                        "questions": [{ "id": "lm_wip", "text": "We use WIP limits to manage flow." }]
+                    },
+                    {
+                        "id": "visual_management",
+                        "name": "Visual Management",
+                        "questions": [{ "id": "lm_visual", "text": "Work status is visible to everyone." }]
+                    },
+                    {
+                        "id": "production_feedback",
+                        "name": "Feedback from Production",
+                        "questions": [{ "id": "lm_feedback", "text": "Production data informs development decisions." }]
+                    },
+                    {
+                        "id": "change_approvals",
+                        "name": "Lightweight Change Approvals",
+                        "questions": [{ "id": "lm_approvals", "text": "Our change approval process is lightweight and efficient." }]
+                    }
+                ]
+            }
         },
         {
             "id": "lean_product_management",
-            "name": "Lean Product Management"
+            "name": "Lean Product Management",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "small_batches",
+                        "name": "Work in Small Batches",
+                        "questions": [{ "id": "lpm_batches", "text": "We decompose work into small, independent pieces." }]
+                    },
+                    {
+                        "id": "work_visibility",
+                        "name": "Make Flow of Work Visible",
+                        "questions": [{ "id": "lpm_visibility", "text": "The entire value stream is visible." }]
+                    },
+                    {
+                        "id": "customer_feedback",
+                        "name": "Gather & Implement Customer Feedback",
+                        "questions": [{ "id": "lpm_feedback", "text": "We regularly gather and act on customer feedback." }]
+                    },
+                    {
+                        "id": "experimentation",
+                        "name": "Team Experimentation",
+                        "questions": [{ "id": "lpm_experiment", "text": "Teams are encouraged to experiment and learn." }]
+                    }
+                ]
+            }
         },
         {
             "id": "less_burnout",
-            "name": "Less Burnout"
+            "name": "Less Burnout",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "burnout_general",
+                        "name": "Burnout Indicators",
+                        "questions": [
+                            { "id": "emotionally_drained", "text": "I feel emotionally drained from my work." },
+                            { "id": "used_up", "text": "I feel used up at the end of the workday." },
+                            { "id": "morning_fatigue", "text": "I feel fatigued when I get up in the morning and have to face another day on the job." },
+                            { "id": "work_strain", "text": "Working all day is really a strain for me." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "less_deployment_pain",
-            "name": "Less Deployment Pain"
+            "name": "Less Deployment Pain",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "deployment_pain_core",
+                        "name": "Deployment Pain",
+                        "questions": [
+                            { "id": "dp_fear", "text": "Deployments are a source of fear for the team." },
+                            { "id": "dp_hours", "text": "Deployments often happen outside of regular business hours." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "less_rework",
-            "name": "Less Rework"
+            "name": "Less Rework",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "rework_core",
+                        "name": "Rework",
+                        "questions": [
+                            { "id": "lr_planned", "text": "Most of our work is planned." },
+                            { "id": "lr_unplanned", "text": "Unplanned work (rework) consumes a significant portion of our time." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "noncommercial_performance",
-            "name": "Noncommercial Performance"
+            "name": "Noncommercial Performance",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "noncomm_core",
+                        "name": "Noncommercial Performance",
+                        "questions": [
+                            { "id": "ncp_goals", "text": "We achieve our noncommercial goals (e.g., social impact)." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "organizational_performance",
-            "name": "Organizational Performance"
+            "name": "Organizational Performance",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "org_perf_core",
+                        "name": "Organizational Performance",
+                        "questions": [
+                            { "id": "op_profit", "text": "The organization is highly profitable (if applicable)." },
+                            { "id": "op_market", "text": "We are leaders in our market." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "software_delivery_performance",
-            "name": "Software Delivery Performance"
+            "name": "Software Delivery Performance",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "sdp_velocity",
+                        "name": "Velocity",
+                        "questions": [
+                            { "id": "sdp_lead_time", "text": "Lead time for changes is short." },
+                            { "id": "sdp_frequency", "text": "Deployment frequency is high." }
+                        ]
+                    },
+                    {
+                        "id": "sdp_stability",
+                        "name": "Stability",
+                        "questions": [
+                            { "id": "sdp_cfr", "text": "Change failure rate is low." },
+                            { "id": "sdp_mttr", "text": "Mean time to recovery is short." }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "id": "westrum_organizational_culture",
-            "name": "Westrum Organizational Culture"
+            "name": "Westrum Organizational Culture",
+            "questionnaire": {
+                "sections": [
+                    {
+                        "id": "culture_cooperation",
+                        "name": "Cooperation",
+                        "questions": [{ "id": "woc_coop", "text": "There is a high level of cooperation across the organization." }]
+                    },
+                    {
+                        "id": "culture_messengers",
+                        "name": "Messengers",
+                        "questions": [{ "id": "woc_msg", "text": "Messengers are not punished when delivering bad news." }]
+                    },
+                    {
+                        "id": "culture_responsibility",
+                        "name": "Responsibility",
+                        "questions": [{ "id": "woc_resp", "text": "Responsibilities are shared." }]
+                    }
+                ]
+            }
         }
     ],
     "relationships": [
-        {
-            "source": "continuous_delivery",
-            "target": "identity"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "job_satisfaction"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "less_burnout"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "less_deployment_pain"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "less_rework"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "software_delivery_performance"
-        },
-        {
-            "source": "continuous_delivery",
-            "target": "westrum_organizational_culture"
-        },
-        {
-            "source": "identity",
-            "target": "organizational_performance"
-        },
-        {
-            "source": "job_satisfaction",
-            "target": "organizational_performance"
-        },
-        {
-            "source": "lean_management",
-            "target": "less_burnout"
-        },
-        {
-            "source": "lean_management",
-            "target": "software_delivery_performance"
-        },
-        {
-            "source": "lean_management",
-            "target": "westrum_organizational_culture"
-        },
-        {
-            "source": "lean_management",
-            "target": "identity"
-        },
-        {
-            "source": "lean_product_management",
-            "target": "identity"
-        },
-        {
-            "source": "lean_management",
-            "target": "job_satisfaction"
-        },
-        {
-            "source": "lean_product_management",
-            "target": "job_satisfaction"
-        },
-        {
-            "source": "lean_product_management",
-            "target": "less_burnout"
-        },
-        {
-            "source": "lean_product_management",
-            "target": "software_delivery_performance"
-        },
-        {
-            "source": "lean_product_management",
-            "target": "westrum_organizational_culture"
-        },
-        {
-            "source": "software_delivery_performance",
-            "target": "lean_product_management"
-        },
-        {
-            "source": "software_delivery_performance",
-            "target": "noncommercial_performance"
-        },
-        {
-            "source": "software_delivery_performance",
-            "target": "organizational_performance"
-        },
-        {
-            "source": "westrum_organizational_culture",
-            "target": "organizational_performance"
-        },
-        {
-            "source": "westrum_organizational_culture",
-            "target": "software_delivery_performance"
-        }
+        { "source": "continuous_delivery", "target": "identity" },
+        { "source": "continuous_delivery", "target": "job_satisfaction" },
+        { "source": "continuous_delivery", "target": "less_burnout" },
+        { "source": "continuous_delivery", "target": "less_deployment_pain" },
+        { "source": "continuous_delivery", "target": "less_rework" },
+        { "source": "continuous_delivery", "target": "software_delivery_performance" },
+        { "source": "continuous_delivery", "target": "westrum_organizational_culture" },
+        { "source": "identity", "target": "organizational_performance" },
+        { "source": "job_satisfaction", "target": "organizational_performance" },
+        { "source": "lean_management", "target": "less_burnout" },
+        { "source": "lean_management", "target": "software_delivery_performance" },
+        { "source": "lean_management", "target": "westrum_organizational_culture" },
+        { "source": "lean_management", "target": "identity" },
+        { "source": "lean_product_management", "target": "identity" },
+        { "source": "lean_management", "target": "job_satisfaction" },
+        { "source": "lean_product_management", "target": "job_satisfaction" },
+        { "source": "lean_product_management", "target": "less_burnout" },
+        { "source": "lean_product_management", "target": "software_delivery_performance" },
+        { "source": "lean_product_management", "target": "westrum_organizational_culture" },
+        { "source": "software_delivery_performance", "target": "lean_product_management" },
+        { "source": "software_delivery_performance", "target": "noncommercial_performance" },
+        { "source": "software_delivery_performance", "target": "organizational_performance" },
+        { "source": "westrum_organizational_culture", "target": "organizational_performance" },
+        { "source": "westrum_organizational_culture", "target": "software_delivery_performance" }
     ]
 }
