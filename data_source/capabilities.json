@@ -1,0 +1,146 @@
+{
+    "capabilities": [
+        {
+            "id": "continuous_delivery",
+            "name": "Continuous Delivery"
+        },
+        {
+            "id": "identity",
+            "name": "Identity"
+        },
+        {
+            "id": "job_satisfaction",
+            "name": "Job Satisfaction"
+        },
+        {
+            "id": "lean_management",
+            "name": "Lean Management"
+        },
+        {
+            "id": "lean_practices",
+            "name": "Lean Practices"
+        },
+        {
+            "id": "lean_product_management",
+            "name": "Lean Product Management"
+        },
+        {
+            "id": "less_burnout",
+            "name": "Less Burnout"
+        },
+        {
+            "id": "less_deployment_pain",
+            "name": "Less Deployment Pain"
+        },
+        {
+            "id": "less_rework",
+            "name": "Less Rework"
+        },
+        {
+            "id": "noncommercial_performance",
+            "name": "Noncommercial Performance"
+        },
+        {
+            "id": "organizational_performance",
+            "name": "Organizational Performance"
+        },
+        {
+            "id": "software_delivery_performance",
+            "name": "Software Delivery Performance"
+        },
+        {
+            "id": "westrum_organizational_culture",
+            "name": "Westrum Organizational Culture"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "continuous_delivery",
+            "target": "identity"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "job_satisfaction"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "less_burnout"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "less_deployment_pain"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "less_rework"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "software_delivery_performance"
+        },
+        {
+            "source": "continuous_delivery",
+            "target": "westrum_organizational_culture"
+        },
+        {
+            "source": "identity",
+            "target": "organizational_performance"
+        },
+        {
+            "source": "job_satisfaction",
+            "target": "organizational_performance"
+        },
+        {
+            "source": "lean_management",
+            "target": "less_burnout"
+        },
+        {
+            "source": "lean_management",
+            "target": "software_delivery_performance"
+        },
+        {
+            "source": "lean_management",
+            "target": "westrum_organizational_culture"
+        },
+        {
+            "source": "lean_practices",
+            "target": "identity"
+        },
+        {
+            "source": "lean_practices",
+            "target": "job_satisfaction"
+        },
+        {
+            "source": "lean_product_management",
+            "target": "less_burnout"
+        },
+        {
+            "source": "lean_product_management",
+            "target": "software_delivery_performance"
+        },
+        {
+            "source": "lean_product_management",
+            "target": "westrum_organizational_culture"
+        },
+        {
+            "source": "software_delivery_performance",
+            "target": "lean_product_management"
+        },
+        {
+            "source": "software_delivery_performance",
+            "target": "noncommercial_performance"
+        },
+        {
+            "source": "software_delivery_performance",
+            "target": "organizational_performance"
+        },
+        {
+            "source": "westrum_organizational_culture",
+            "target": "organizational_performance"
+        },
+        {
+            "source": "westrum_organizational_culture",
+            "target": "software_delivery_performance"
+        }
+    ]
+}

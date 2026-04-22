@@ -1,0 +1,60 @@
+Software Delivery Performance -> Organizational Performance
+Software Delivery Performance -> Noncommercial Performance
+Westrum Organizational Performance -> Software Delivery Performance
+Westrum Organizational Performance -> Organizational Performance
+Continuous Delivery -> Westrum Organizational Culture
+Lean Management -> Westrum Organizational Culture
+Continuous Delivery -> Westrum Organizational Culture -> Organizational Performance
+Continuous Delivery -> Software Delivery Performance -> Organizational Performance
+Continuous Delivery -> Identity -> Organizational Performance
+Continuous Delivery -> Less Rework
+Continuous Delivery -> Less Deployment Pain
+Continuous Delivery -> Less Burnout
+Lean Management -> Westrum Organizational Culture
+Lean Management -> Software Delivery Performance
+Lean Management -> Less Burnout
+Lean Product Management -> Westrum Organizational Culture -> Organizational Performance
+Lean Product Management -> Software Delivery Performance -> Organizational Performance
+Software Delivery Performance -> Lean Product Management
+Lean Product Management -> Less Burnout
+Continuous Delivery -> Less Deployment Pain
+Continuous Delivery -> Less Burnout
+Continuous Delivery -> Identity
+Lean Practices -> Identity
+Identity -> Organizational Performance
+Continuous Delivery -> Job Satisfaction
+Lean Practices -> Job Satisfaction
+Job Satisfaction -> Organizational Performance
+
+
+Continuous Delivery:
+    - Version Control
+    - Deployment Automation
+    - Continuous Integration
+    - Trunk-Based Development
+    - Test Automation
+    - Test Data Management
+    - Shift Left on Security
+    - Loosely Coupled Architecture
+    - Empowered Teams
+    - Monitoring
+    - Proactive Notifications
+
+Lean Management
+    - Limit Work in Progress
+    - Visual Management
+    - Feedback from Production
+    - Lightweight Change Approvals
+
+Lean Product Development
+    - Work in Small Batches
+    - Make Flow of Work Visible
+    - Gather & Implement Customer Feedback
+    - Team Experimentation
+
+Transformational Leadership
+    - Vision
+    - Inspirational Communication
+    - Intellectual Stimulation
+    - Supportive Leadership
+    - Personal Recognition
