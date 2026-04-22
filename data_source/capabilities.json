@@ -17,10 +17,6 @@
             "name": "Lean Management"
         },
         {
-            "id": "lean_practices",
-            "name": "Lean Practices"
-        },
-        {
             "id": "lean_product_management",
             "name": "Lean Product Management"
         },
@@ -103,11 +99,19 @@
             "target": "westrum_organizational_culture"
         },
         {
-            "source": "lean_practices",
+            "source": "lean_management",
             "target": "identity"
         },
         {
-            "source": "lean_practices",
+            "source": "lean_product_management",
+            "target": "identity"
+        },
+        {
+            "source": "lean_management",
+            "target": "job_satisfaction"
+        },
+        {
+            "source": "lean_product_management",
             "target": "job_satisfaction"
         },
         {

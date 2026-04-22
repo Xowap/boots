@@ -2,7 +2,7 @@ import { browser } from "$app/environment";
 
 export interface CapabilityData {
     score: number;
-    // Ready for more properties in the future
+    mode: 'auto' | 'manual';
 }
 
 export interface Study {
@@ -28,14 +28,21 @@ class StudyManager {
         const migratedData: Record<string, CapabilityData> = {};
         for (const [key, value] of Object.entries(study.data)) {
             if (typeof value === "number") {
-                migratedData[key] = { score: value };
+                migratedData[key] = { score: value, mode: 'auto' };
             } else {
-                migratedData[key] = value as CapabilityData;
+                const val = value as any;
+                migratedData[key] = {
+                    score: val.score ?? 0,
+                    mode: val.mode ?? 'auto'
+                };
             }
         }
 
         return {
             ...study,
+            id: study.id,
+            name: study.name,
+            updatedAt: study.updatedAt,
             data: migratedData,
         };
     }

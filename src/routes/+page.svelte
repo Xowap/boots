@@ -40,7 +40,7 @@
     function resetMaturity() {
         const newMaturity: Record<string, CapabilityData> = {};
         data.capabilities.forEach(cap => {
-            newMaturity[cap.id] = { score: 0 };
+            newMaturity[cap.id] = { score: 0, mode: 'auto' };
         });
         maturity = newMaturity;
     }
@@ -139,17 +139,19 @@
         return color;
     }
 
-    function updateNodeStyle(nodeId: string, value: number, isSelected: boolean) {
+    function updateNodeStyle(nodeId: string, value: number, isSelected: boolean, mode: 'auto' | 'manual' = 'manual') {
         if (!cy) return;
         const node = cy.$id(nodeId);
         if (node) {
             const maturityColor = getMaturityColor(value);
             const progressColor = getMaturityColor(value, true);
             const borderWidth = isSelected ? 8 : 3;
+            const borderStyle = mode === 'auto' ? 'dashed' : 'solid';
             
             node.style({
                 'border-color': maturityColor,
                 'border-width': borderWidth,
+                'border-style': borderStyle,
                 'background-gradient-stop-colors': `${progressColor} ${progressColor} #ffffff`,
                 'background-gradient-stop-positions': `0% ${value}% ${value}%`
             } as any);
@@ -263,6 +265,86 @@
         };
     });
 
+    // Reactive effect for PageRank computation
+    $effect(() => {
+        if (!cy || !initialized) return;
+
+        // We want to re-run this whenever any maturity score or mode changes
+        // but we must be careful about infinite loops.
+        // We'll use a deep copy of maturity to track changes.
+        const currentMaturity = JSON.parse(JSON.stringify(maturity));
+        
+        const nodes = data.capabilities.map(c => c.id);
+        const incoming = nodes.reduce((acc, id) => {
+            acc[id] = cy.$id(id).incomers('node').map(n => n.id());
+            return acc;
+        }, {} as Record<string, string[]>);
+        
+        const outDegree = nodes.reduce((acc, id) => {
+            acc[id] = cy.$id(id).outgoers('edge').length;
+            return acc;
+        }, {} as Record<string, number>);
+
+        let scores = nodes.reduce((acc, id) => {
+            acc[id] = currentMaturity[id]?.score ?? 0;
+            return acc;
+        }, {} as Record<string, number>);
+
+        let changedAny = false;
+        // Iterative PageRank-like computation
+        // We use a damping-like factor approach to prevent score explosion
+        // and ensure that 100% in leads to high but not 100% out usually.
+        const DAMPING = 0.85; 
+
+        for (let i = 0; i < 20; i++) {
+            let nextScores = { ...scores };
+            let changedThisIter = false;
+            
+            for (const id of nodes) {
+                if (currentMaturity[id]?.mode === 'auto') {
+                    const parents = incoming[id];
+                    if (parents.length === 0) {
+                        if (nextScores[id] !== 0) {
+                            nextScores[id] = 0;
+                            changedThisIter = true;
+                        }
+                        continue;
+                    }
+
+                    // Calculate average maturity of parents
+                    let sumParents = 0;
+                    for (const p of parents) {
+                        sumParents += scores[p];
+                    }
+                    const avgParentScore = sumParents / parents.length;
+                    
+                    // The node maturity is a damped version of the average parent maturity.
+                    // This means if a single parent is 100%, the child gets 85%.
+                    // If multiple parents average to 80%, the child gets 68%.
+                    const newVal = Math.min(100, Math.round(avgParentScore * DAMPING));
+
+                    if (nextScores[id] !== newVal) {
+                        nextScores[id] = newVal;
+                        changedThisIter = true;
+                    }
+                }
+            }
+            scores = nextScores;
+            if (!changedThisIter) break;
+            changedAny = true;
+        }
+
+        if (changedAny) {
+            untrack(() => {
+                for (const id of nodes) {
+                    if (maturity[id].mode === 'auto' && maturity[id].score !== scores[id]) {
+                        maturity[id].score = scores[id];
+                    }
+                }
+            });
+        }
+    });
+
     // Reactive effect for all node styles
     $effect(() => {
         if (cy) {
@@ -272,8 +354,9 @@
             
             data.capabilities.forEach(cap => {
                 const val = currentMaturity[cap.id]?.score ?? 0;
+                const mode = currentMaturity[cap.id]?.mode ?? 'manual';
                 const isSelected = cap.id === currentSelection;
-                updateNodeStyle(cap.id, val, isSelected);
+                updateNodeStyle(cap.id, val, isSelected, mode);
             });
         }
     });
@@ -423,7 +506,26 @@
                 </header>
                 
                 <div class="control-group">
-                    <div class="slider-header">
+                    <div class="mode-selector">
+                        <button 
+                            class:active={maturity[selectedNodeId]?.mode === 'manual'} 
+                            onclick={() => {
+                                if (selectedNodeId) maturity[selectedNodeId].mode = 'manual';
+                            }}
+                        >
+                            Manual
+                        </button>
+                        <button 
+                            class:active={maturity[selectedNodeId]?.mode === 'auto'} 
+                            onclick={() => {
+                                if (selectedNodeId) maturity[selectedNodeId].mode = 'auto';
+                            }}
+                        >
+                            Auto
+                        </button>
+                    </div>
+
+                    <div class="slider-header" class:disabled={maturity[selectedNodeId]?.mode === 'auto'}>
                         <span class="maturity-label">Evaluation</span>
                         <span class="maturity-value" style="color: {getMaturityColor(maturity[selectedNodeId]?.score ?? 0)}">
                             {maturity[selectedNodeId]?.score ?? 0}%
@@ -434,13 +536,11 @@
                         type="single"
                         value={maturity[selectedNodeId]?.score ?? 0}
                         onValueChange={(v) => {
-                            if (selectedNodeId) {
-                                if (!maturity[selectedNodeId]) {
-                                    maturity[selectedNodeId] = { score: 0 };
-                                }
+                            if (selectedNodeId && maturity[selectedNodeId].mode === 'manual') {
                                 maturity[selectedNodeId].score = v;
                             }
                         }}
+                        disabled={maturity[selectedNodeId]?.mode === 'auto'}
                         max={100}
                         step={5}
                         class="slider-root"
@@ -468,6 +568,9 @@
         <div class="legend-item"><span class="dot" style="background: #f97316"></span> Medium (25-49%)</div>
         <div class="legend-item"><span class="dot" style="background: #f59e0b"></span> High (50-74%)</div>
         <div class="legend-item"><span class="dot" style="background: #22c55e"></span> Elite (75-100%)</div>
+        <div class="legend-separator"></div>
+        <div class="legend-item"><span class="box solid"></span> Manual Mode</div>
+        <div class="legend-item"><span class="box dashed"></span> Auto (PageRank)</div>
     </div>
 </div>
 
@@ -799,6 +902,37 @@
         font-weight: 800;
     }
 
+    .mode-selector {
+        display: flex;
+        background: #f1f5f9;
+        padding: 4px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .mode-selector button {
+        flex: 1;
+        border: none;
+        background: none;
+        padding: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #64748b;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .mode-selector button.active {
+        background: white;
+        color: #1e293b;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    }
+
+    .slider-header.disabled {
+        opacity: 0.5;
+    }
+
     .slider-markers {
         display: flex;
         justify-content: space-between;
@@ -836,6 +970,28 @@
         height: 8px;
         border-radius: 50%;
         margin-right: 8px;
+    }
+
+    .legend-separator {
+        height: 1px;
+        background: #f1f5f9;
+        margin: 4px 0;
+    }
+
+    .box {
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        border: 2px solid #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .box.solid {
+        border-style: solid;
+    }
+
+    .box.dashed {
+        border-style: dashed;
     }
 
     .dialog-field {
