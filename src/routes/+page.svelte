@@ -46,16 +46,19 @@
                     let count = 0;
                     section.questions.forEach((q: any) => {
                         if (questionnaireAnswers[q.id] !== undefined) {
-                            total += (5 - questionnaireAnswers[q.id]) / 4;
+                            const val = questionnaireAnswers[q.id];
+                            if (q.type === "negative") {
+                                total += (5 - val) / 4;
+                            } else {
+                                total += (val - 1) / 4;
+                            }
                             count++;
                         }
                     });
 
-                    if (count > 0) {
-                        subScores[section.id] = Math.round(
-                            (total / section.questions.length) * 100
-                        );
-                    }
+                    subScores[section.id] = Math.round(
+                        (total / section.questions.length) * 100
+                    );
                 }
             );
 

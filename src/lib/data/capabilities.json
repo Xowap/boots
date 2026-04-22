@@ -313,19 +313,23 @@
                         "questions": [
                             {
                                 "id": "emotionally_drained",
-                                "text": "I feel emotionally drained from my work."
+                                "text": "I feel emotionally drained from my work.",
+                                "type": "negative"
                             },
                             {
                                 "id": "used_up",
-                                "text": "I feel used up at the end of the workday."
+                                "text": "I feel used up at the end of the workday.",
+                                "type": "negative"
                             },
                             {
                                 "id": "morning_fatigue",
-                                "text": "I feel fatigued when I get up in the morning and have to face another day on the job."
+                                "text": "I feel fatigued when I get up in the morning and have to face another day on the job.",
+                                "type": "negative"
                             },
                             {
                                 "id": "work_strain",
-                                "text": "Working all day is really a strain for me."
+                                "text": "Working all day is really a strain for me.",
+                                "type": "negative"
                             }
                         ]
                     }
@@ -343,11 +347,13 @@
                         "questions": [
                             {
                                 "id": "dp_fear",
-                                "text": "Deployments are a source of fear for the team."
+                                "text": "Deployments are a source of fear for the team.",
+                                "type": "negative"
                             },
                             {
                                 "id": "dp_hours",
-                                "text": "Deployments often happen outside of regular business hours."
+                                "text": "Deployments often happen outside of regular business hours.",
+                                "type": "negative"
                             }
                         ]
                     }
@@ -369,7 +375,8 @@
                             },
                             {
                                 "id": "lr_unplanned",
-                                "text": "Unplanned work (rework) consumes a significant portion of our time."
+                                "text": "Unplanned work (rework) consumes a significant portion of our time.",
+                                "type": "negative"
                             }
                         ]
                     }
