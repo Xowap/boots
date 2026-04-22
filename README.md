@@ -1,45 +1,63 @@
-# sv
+# Boots
 
-Everything you need to build a Svelte project, powered by
-[`sv`](https://github.com/sveltejs/cli).
+A modern SvelteKit application managed with the Model W philosophy.
 
-## Creating a project
+## Architecture
 
-If you're seeing this, you've probably already done this step. Congrats!
+This project is built as a SvelteKit application using TypeScript and pnpm. While currently a standalone application, it is structured to support growth into a full Model W monorepo.
 
-```sh
-# create a new project
-npx sv create my-app
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [pnpm](https://pnpm.io/)
+
+### Installation
+
+```bash
+pnpm install
 ```
 
-To recreate this project with the same configuration:
+### Development
 
-```sh
-# recreate this project
-pnpm dlx sv@0.15.1 create --template minimal --types ts --install pnpm boots
+Start the development server:
+
+```bash
+pnpm dev
 ```
 
-## Developing
+### Production Build
 
-Once you've created a project and installed dependencies with `npm install` (or
-`pnpm install` or `yarn`), start a development server:
+Create a production-ready build:
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+pnpm build
 ```
 
-## Building
+Preview the production build:
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+pnpm preview
 ```
 
-You can preview the production build with `npm run preview`.
+## Quality Assurance
 
-> To deploy your app, you may need to install an
-> [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+We maintain high standards through the following checks:
+
+```bash
+pnpm check    # Svelte-check and TypeScript verification
+pnpm format   # Formatting via Prettier (pnpm exec prettier --write .)
+```
+
+## Model W Management
+
+This project uses Model W management skills for standardized workflows. If you are using an agent like OpenCode, you can leverage these specialized skills:
+
+- `model-w-project-structure`: Guidance on the directory layout and tech stack.
+- `model-w-deps-web`: Managed pnpm dependency updates.
+- `model-w-qa-web`: Comprehensive QA routines.
+- `model-w-update`: Quarterly system-wide upgrades.
+
+---
+Managed by [Model W](https://with-madrid.com)
