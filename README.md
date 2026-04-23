@@ -25,7 +25,7 @@ This project is built as a SvelteKit application using:
 
 - **Svelte 5**: Utilizing the latest runes-based reactivity.
 - **Cytoscape.js**: For high-performance graph visualization and layout.
-- **Bits UI & Tailwind CSS**: For a polished, accessible user interface.
+- **Bits UI & SCSS**: For a polished, accessible user interface with modern styling.
 - **TypeScript**: Ensuring type safety across the assessment logic.
 
 ## Getting Started
