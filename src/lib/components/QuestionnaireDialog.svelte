@@ -57,9 +57,9 @@
                                                         type="radio"
                                                         name={question.id}
                                                         value={opt.v}
-                                                        bind:group={answers[
-                                                            question.id
-                                                        ]}
+                                                        bind:group={
+                                                            answers[question.id]
+                                                        }
                                                     />
                                                     <span class="option-dot"
                                                     ></span>

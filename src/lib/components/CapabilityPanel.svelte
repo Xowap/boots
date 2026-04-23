@@ -114,8 +114,7 @@
                                             )}"
                                         >
                                             {maturity[selectedNodeId]
-                                                ?.subScores?.[section.id] ??
-                                                0}%
+                                                ?.subScores?.[section.id] ?? 0}%
                                         </span>
                                     </div>
                                     <Slider.Root
